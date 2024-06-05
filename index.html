@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Fine-grained action parser for action quality assessment.">
+  <meta name="keywords" content="AQA, FineDiving, FineParser">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FineParser: A Fine-grained Spatio-temporal Action Parser for
+    Human-centric
+    Action Quality Assessment</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <style>
+    .my-container img {
+      margin-top: 22px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="http://39.108.48.32/XuWebsite/">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/xujinglin/FineDiving">
+              FineDiving
+            </a>
+            <a class="navbar-item" href="https://github.com/PKU-ICST-MIPL/FineSports_CVPR2024">
+              FineSports
+            </a>
+            <a class="navbar-item" href="https://pku-icst-mipl.github.io/FinePOSE_ProjectPage/">
+              FinePOSE
+            </a>
+            <a class="navbar-item" href="http://39.108.48.32/mipl/home/">
+              More
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">FineParser: A Fine-grained Spatio-temporal Action Parser for
+              Human-centric
+              Action Quality Assessment</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="http://39.108.48.32/XuWebsite/">Jinglin Xu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="http://39.108.48.32/mipl/news/news.php?id=CHyisibo">Sibo Yin</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="http://39.108.48.32/mipl/news/news.php?id=CHzhaoguohao">Guohao Zhao</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="http://39.108.48.32/mipl/news/news.php?id=CHwangzishuo">Zishuo Wang</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="http://39.108.48.32/mipl/pengyuxin/">Yuxin Peng</a><sup>2</sup>,
+              </span>
+
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>School of Intelligence Science and Technology, University of
+                Science and Technology Beijing,</span>
+              <span class="author-block"><sup>2</sup>Wangxuan Institute of Computer Technology, Peking University</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2405.06887"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+               
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/PKU-ICST-MIPL/FineParser_CVPR2024"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/PKU-ICST-MIPL/FineParser_CVPR2024"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                  </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div style="display: flex; justify-content: space-around;">
+          <img src="./static/images/top.png" height="100%" alt="Image 3">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            <strong>Figure 1: An overview of <span class="dnerf">FineParser</span>.</strong> It enhances human-centric
+            foreground action representations by exploiting fine-grained semantic
+            consistency and spatial-temporal correlation between video frames, improving the AQA performance. Green,
+            red, yellow, and blue dashed
+            lines represent the fine-grained alignment of target actions between query and exemplar videos in time and
+            space within the same semantics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Existing action quality assessment (AQA) methods mainly learn deep representations at the video level for
+              scoring diverse actions. Due to the lack of a fine-grained
+              understanding of actions in videos, they harshly suffer
+              from low credibility and interpretability, thus insufficient
+              for stringent applications, such as Olympic diving events.
+              We argue that a fine-grained understanding of actions requires the model to perceive and parse actions in
+              both time
+              and space, which is also the key to the credibility and interpretability of the AQA technique. Based on
+              this insight, we
+              propose a new fine-grained spatial-temporal action parser
+              named <span class="dnerf">FineParser</span>. It learns human-centric foreground action representations by
+              focusing on target action regions
+              within each frame and exploiting their fine-grained alignments in time and space to minimize the impact of
+              invalid backgrounds during the assessment. In addition, we
+              construct fine-grained annotations of human-centric foreground action masks for the FineDiving dataset,
+              called
+              <span class="dnerf">FineDiving-HM</span>. With refined annotations on diverse target action procedures,
+              FineDiving-HM can promote the development of real-world AQA systems. Through extensive experiments, we
+              demonstrate the effectiveness of FineParser,
+              which outperforms state-of-the-art methods while supporting more tasks of fine-grained action
+              understanding. Data
+              and Code are available at <a href="https://github.com/PKU-ICST-MIPL/FineParser_CVPR2024"
+                target="_blank">https://github.com/PKU-ICST-MIPL/FineParser_CVPR2024</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Approach</h2>
+          <div style="display: flex; justify-content: space-around;">
+            <img src="./static/images/method.png" alt="Approach Image">
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              <strong>Figure 2: The Architecture of the Proposed FineParser.</strong> Given a pair of query and exemplar
+              videos, the spatial action parser (SAP) and temporal action parser (TAP) extract spatial-temporal
+              representations of human-centric foreground actions in the pairwise videos. They also predict both target
+              action masks and step transitions.
+
+              The static visual encoder (SVE) captures static visual representations, which are then combined with the
+              target action representation to mine more contextual details. Finally, fine-grained contrastive regression
+              (FineREG) utilizes these comprehensive representations to predict the action score of the query video.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+
+      <!-- dataset. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Dataset: FineDiving-HM</h2>
+          <div style="display: flex; justify-content: space-around;">
+            <img src="./static/images/FineDiving-HM.png" alt="Approach Image">
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              <strong>Figure 3: Examples of human-centric action mask annotations for the FineDiving dataset. </strong>
+              The right line indicates the action type.
+            </p>
+            <p>
+              <strong>FineDiving-HM</strong> contains
+              312,256 mask frames covering 3,000 videos, in which
+              each mask labels the target action region to distinguish the
+              human-centric foreground and background. FineDiving-HM mitigates the problem of requiring frame-level
+              annotations to understand human-centric actions from fine-grained
+              spatial and temporal levels. We employ three workers with
+              prior diving knowledge to double-check the annotations
+              to control their quality. Figure 3 shows some examples of
+              human-centric action mask annotations, which precisely focus on foreground target actions. There are
+              312,256 foreground action masks in FineDiving-HM, where the number of action masks for individual
+              diving
+              is 248,713 and that for synchronized diving is 63,543.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ dataset. -->
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <!-- results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Results</h2>
+        </div>
+      </div>
+      <!--/ results. -->
+
+      <div class="columns is-centered">
+
+        <!-- Visual Effects. -->
+        <div class="column my-container">
+          <div class="content">
+            <p>
+              <strong>Table 1: </strong> Comparisons of performance with state-of-the-art AQA
+              methods on the FineDiving-HM Dataset. Our result is highlighted
+              in the bold format.
+            </p>
+            <img src="./static/images/table1.png" alt="Table1 Image">
+          </div>
+        </div>
+        <!--/ Visual Effects. -->
+
+        <!-- Matting. -->
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <p>
+                <strong>Table 2: </strong>Comparisons of performance with representative AQA
+                methods on the MTL-AQA dataset. Our result is highlighted in
+                the bold format.
+
+              </p>
+              <img src="./static/images/table2.png" alt="Table2 Image">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--/ Matting. -->
+    </div>
+  </section>
+
+  <section class="section"></section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Visualization</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div style="display: flex; justify-content: space-around;">
+          <img src="./static/images/v1.png" alt="Approach Image">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            <strong>Figure 5: Visualization of the predictions of target action masks produced by SAP. </strong>
+            The predicted masks can focus on the target action
+            regions in each frame, minimizing the impact of invalid backgrounds on action quality assessment.
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!-- <div class="hero-body" style="display: flex; justify-content: space-around;">
+      <video id="teaser1" autoplay muted loop playsinline height="100%" style="margin-right: 20px;">
+        <source src="./static/videos/top_video1_con.mp4" type="video/mp4">
+      </video>
+      <video id="teaser2" autoplay muted loop playsinline height="100%" style="margin-right: 20px;">
+        <source src="./static/videos/top_video2_con.mp4" type="video/mp4">
+      </video>
+      <video id="teaser3" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/top_video3_con.mp4" type="video/mp4">
+      </video>
+    </div>
+    <h2 class="subtitle has-text-centered">
+      <span class="dnerf">FineParser</span> parses video across temporal and spatial dimensions.
+    </h2>
+  </div> -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+      <!-- 第一行 -->
+      <img src="./static/gifs/301b_FINADivingWorldCup2021_Women10mSynchronised_final_r1_9_masked_video.gif"
+        alt="Video 1" style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/401b_FINADivingWorldCup2021_Men10mSynchronised_final_r1_2_masked_video.gif" alt="Video 2"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/103b_FINADivingWorldCup2021_Men3mSynchronised_final_r1_2_masked_video.gif" alt="Video 3"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/201b_FINADivingWorldCup2021_Women3mSynchronised_final_r2_4_masked_video.gif" alt="Video 4"
+        style="width: 24%; margin: 0.5%;">
+
+      <!-- 第二行 -->
+      <img src="./static/gifs/307c_3mMenSpringboardFinal-EuropeanChampionships2021_3_4_masked_video.gif" alt="Video 5"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/6245d_FINADivingWorldCup2021_Men10m_final_r1_5_masked_video.gif" alt="Video 6"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/109c_3mMenSpringboardFinal-EuropeanChampionships2021_3_16_masked_video.gif" alt="Video 7"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/205b_3mMenSpringboardFinal-EuropeanChampionships2021_3_7_masked_video.gif" alt="Video 8"
+        style="width: 24%; margin: 0.5%;">
+
+      <!-- 第三行 -->
+      <img src="./static/gifs/205b_Budapest2021Diving10mPlatformWomenFinal_1_7_masked_video.gif" alt="Video 9"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/5253b_Budapest2021Diving10mPlatformWomenFinal_1_8_masked_video.gif" alt="Video 10"
+        style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/301b_FINADivingWorldCup2021_Women3mSynchronised_final_r2_6_masked_video.gif"
+        alt="Video 11" style="width: 24%; margin: 0.5%;">
+      <img src="./static/gifs/5156b_3mMenSpringboardFinal-EuropeanChampionships2021_3_1_masked_video.gif" alt="Video 12"
+        style="width: 24%; margin: 0.5%;">
+
+    </div>
+  </div>
+
+
+  <h2 class="subtitle has-text-centered">
+    FineParser parses video across <strong>temporal and spatial</strong> dimensions.
+  </h2>
+
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{xu2024fineparser,
+          title={FineParser: A Fine-grained Spatio-temporal Action Parser for Human-centric Action Quality Assessment}, 
+          author={Jinglin Xu and Sibo Yin and Guohao Zhao and Zishuo Wang and Yuxin Peng},
+          year={2024},
+          eprint={2405.06887},
+          archivePrefix={arXiv},
+          primaryClass={cs.CV}
+    }</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://github.com/PKU-ICST-MIPL/FineParser_CVPR2024">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/PKU-ICST-MIPL/FineParser_CVPR2024" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div>
+          <div class="content">
+            <p>
+              Thanks for the template from <a
+                href="https://github.com/nerfies/nerfies.github.io/blob/main/index.html">source code</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
